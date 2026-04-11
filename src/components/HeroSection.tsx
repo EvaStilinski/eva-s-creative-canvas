@@ -1,26 +1,26 @@
 import dragonImage from "@/assets/dragon-rainbow.png";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface HeroSectionProps {
   creativeMode: boolean;
 }
 
 const HeroSection = ({ creativeMode }: HeroSectionProps) => {
+  const { ref, isVisible } = useScrollReveal(0.1);
+
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
-      {/* Dragon - only visible in creative mode */}
+    <section ref={ref} className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
       <img
         src={dragonImage}
         alt="Rainbow dragon"
         width={1024}
         height={1024}
         className={`absolute right-[-5%] top-[10%] w-[40vw] max-w-lg transition-all duration-1000 pointer-events-none ${
-          creativeMode
-            ? "opacity-30 float-animation"
-            : "opacity-0 scale-75"
+          creativeMode ? "opacity-30 float-animation" : "opacity-0 scale-75"
         }`}
       />
 
-      <div className="max-w-3xl mx-auto text-center relative z-10">
+      <div className={`max-w-3xl mx-auto text-center relative z-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <p
           className={`text-sm tracking-[0.3em] uppercase mb-6 transition-colors duration-700 ${
             creativeMode ? "rainbow-text font-bold" : "text-muted-foreground"
