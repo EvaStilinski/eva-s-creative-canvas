@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface ProjectsSectionProps {
   creativeMode: boolean;
@@ -22,32 +23,40 @@ const projects = [
 ];
 
 const ProjectsSection = ({ creativeMode }: ProjectsSectionProps) => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal(0.1);
+
   return (
     <section id="projects" className="py-24 px-6">
       <div className="max-w-3xl mx-auto">
-        <h2
-          className={`text-3xl sm:text-4xl font-heading font-bold mb-4 transition-all duration-700 ${
-            creativeMode ? "rainbow-text" : "text-foreground"
-          }`}
-        >
-          Projects & Art
-        </h2>
-        <p className="text-muted-foreground mb-12">
-          Building my portfolio one dream at a time. More coming soon!
-        </p>
+        <div ref={headerRef} className={`transition-all duration-700 ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          <h2
+            className={`text-3xl sm:text-4xl font-heading font-bold mb-4 transition-all duration-700 ${
+              creativeMode ? "rainbow-text" : "text-foreground"
+            }`}
+          >
+            Projects & Art
+          </h2>
+          <p className="text-muted-foreground mb-12">
+            Building my portfolio one dream at a time. More coming soon!
+          </p>
+        </div>
 
-        <div className="grid gap-6">
-          {projects.map((project) => (
+        <div ref={cardsRef} className="grid gap-6">
+          {projects.map((project, i) => (
             <a
               key={project.title}
               href={project.link}
               target={project.link !== "#" ? "_blank" : undefined}
               rel="noopener noreferrer"
               className={`block p-6 rounded-xl border transition-all duration-500 group ${
+                cardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              } ${
                 creativeMode
                   ? "rainbow-border bg-card hover:shadow-lg"
                   : "border-border bg-card hover:border-foreground/20 hover:shadow-sm"
               }`}
+              style={{ transitionDelay: cardsVisible ? `${i * 150}ms` : "0ms" }}
             >
               <div className="flex items-start justify-between mb-3">
                 <h3 className="text-xl font-heading font-semibold text-foreground group-hover:underline">

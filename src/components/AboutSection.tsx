@@ -1,11 +1,15 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 interface AboutSectionProps {
   creativeMode: boolean;
 }
 
 const AboutSection = ({ creativeMode }: AboutSectionProps) => {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section id="about" className="py-24 px-6">
-      <div className="max-w-3xl mx-auto">
+      <div ref={ref} className={`max-w-3xl mx-auto transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         <h2
           className={`text-3xl sm:text-4xl font-heading font-bold mb-8 transition-all duration-700 ${
             creativeMode ? "rainbow-text" : "text-foreground"

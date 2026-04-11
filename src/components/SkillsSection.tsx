@@ -1,3 +1,5 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 interface SkillsSectionProps {
   creativeMode: boolean;
 }
@@ -22,20 +24,30 @@ const learningNext = [
 ];
 
 const SkillsSection = ({ creativeMode }: SkillsSectionProps) => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: barsRef, isVisible: barsVisible } = useScrollReveal(0.1);
+  const { ref: learningRef, isVisible: learningVisible } = useScrollReveal();
+
   return (
     <section id="skills" className="py-24 px-6 bg-secondary/50">
       <div className="max-w-3xl mx-auto">
-        <h2
-          className={`text-3xl sm:text-4xl font-heading font-bold mb-12 transition-all duration-700 ${
-            creativeMode ? "rainbow-text" : "text-foreground"
-          }`}
-        >
-          Skills & Tools
-        </h2>
+        <div ref={headerRef} className={`transition-all duration-700 ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          <h2
+            className={`text-3xl sm:text-4xl font-heading font-bold mb-12 transition-all duration-700 ${
+              creativeMode ? "rainbow-text" : "text-foreground"
+            }`}
+          >
+            Skills & Tools
+          </h2>
+        </div>
 
-        <div className="space-y-4 mb-16">
-          {skills.map((skill) => (
-            <div key={skill.name} className="group">
+        <div ref={barsRef} className="space-y-4 mb-16">
+          {skills.map((skill, i) => (
+            <div
+              key={skill.name}
+              className={`group transition-all duration-500 ${barsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+              style={{ transitionDelay: barsVisible ? `${i * 80}ms` : "0ms" }}
+            >
               <div className="flex justify-between mb-1.5">
                 <span className="text-sm font-medium text-foreground">{skill.name}</span>
                 <span className="text-xs text-muted-foreground">{skill.level}%</span>
@@ -45,14 +57,17 @@ const SkillsSection = ({ creativeMode }: SkillsSectionProps) => {
                   className={`h-full rounded-full transition-all duration-1000 ${
                     creativeMode ? "rainbow-gradient" : "bg-foreground"
                   }`}
-                  style={{ width: `${skill.level}%` }}
+                  style={{
+                    width: barsVisible ? `${skill.level}%` : "0%",
+                    transitionDelay: `${i * 80 + 200}ms`,
+                  }}
                 />
               </div>
             </div>
           ))}
         </div>
 
-        <div>
+        <div ref={learningRef} className={`transition-all duration-700 delay-200 ${learningVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           <h3 className="text-xl font-heading font-semibold mb-4 text-foreground">
             🚀 What I'm Learning Next
           </h3>
