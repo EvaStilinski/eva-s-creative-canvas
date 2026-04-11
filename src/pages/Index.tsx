@@ -1,16 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import SkillsSection from "@/components/SkillsSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
+import CreativityToggle from "@/components/CreativityToggle";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [creativeMode, setCreativeMode] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className={`min-h-screen transition-all duration-700 ${creativeMode ? "" : ""}`}>
+      <Navbar creativeMode={creativeMode} />
+      <HeroSection creativeMode={creativeMode} />
+      <AboutSection creativeMode={creativeMode} />
+      <SkillsSection creativeMode={creativeMode} />
+      <ProjectsSection creativeMode={creativeMode} />
+      <ContactSection creativeMode={creativeMode} />
+      <CreativityToggle
+        creativeMode={creativeMode}
+        onToggle={() => setCreativeMode(!creativeMode)}
+      />
+      <footer className="py-8 text-center text-sm text-muted-foreground border-t border-border">
+        © 2026 Eva Lucero Pérez S. — Built with 💛 and a little bit of magic.
+      </footer>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
