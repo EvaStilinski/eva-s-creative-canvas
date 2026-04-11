@@ -17,6 +17,7 @@ const Navbar = ({ creativeMode }: NavbarProps) => {
           <a href="#about" className="hover:text-foreground transition-colors">About</a>
           <a href="#skills" className="hover:text-foreground transition-colors">Skills</a>
           <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
+          <a href="#gallery" className="hover:text-foreground transition-colors">Gallery</a>
           <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
         </div>
       </div>

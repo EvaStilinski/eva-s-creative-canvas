@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import CreativityToggle from "@/components/CreativityToggle";
 
@@ -17,6 +18,7 @@ const Index = () => {
       <AboutSection creativeMode={creativeMode} />
       <SkillsSection creativeMode={creativeMode} />
       <ProjectsSection creativeMode={creativeMode} />
+      <GallerySection creativeMode={creativeMode} />
       <ContactSection creativeMode={creativeMode} />
       <CreativityToggle
         creativeMode={creativeMode}
