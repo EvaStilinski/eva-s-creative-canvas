@@ -25,7 +25,7 @@ const Index = () => {
         creativeMode={creativeMode}
         onToggle={() => setCreativeMode(!creativeMode)}
       />
-      <footer className="py-8 text-center text-sm text-muted-foreground border-t border-border">
+      <ChatBot /> className="py-8 text-center text-sm text-muted-foreground border-t border-border">
         © 2026 Eva Lucero Pérez S. — Built with 💛 and a little bit of magic.
       </footer>
     </div>
