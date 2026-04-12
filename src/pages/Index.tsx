@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import CreativityToggle from "@/components/CreativityToggle";
+import ChatBot from "@/components/ChatBot";
 
 const Index = () => {
   const [creativeMode, setCreativeMode] = useState(false);
